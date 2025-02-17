@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation - IONIT.ONLINE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+    <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+</head>
+<body>
+<!--
+<div class='right-panel-code'>
+    <pre id="output">
+		{{ data | tojson(indent=4) }}
+	</pre>
+</div>
+-->
+
+	<div class="uk-container-header-menu">
+		IONIT.ONLINE
+	</div>
+	
+<div class="container">
+	<div class="uk-container-flex">
+		<div class="uk-container-left-menu">
+			
+		</div>
+		<div class="uk-container-content">
+		<div uk-grid>
+			<div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-1@l">
+				<div class="container-box">
+					<h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 text-left flex items-center gap-2 ">Автоматический подбор индикаторов для максимально выгодной сделки</h2>
+					<div class="uk-flex-1">
+						<div class="inner-box">
+							<div class="uk-overflow-auto">
+								<table class='uk-table uk-table-divider uk-table-striped uk-table-hover uk-table-small uk-table-justify '>
+									<thead>
+										<tr>
+											<th class='uk-text-center'>
+												Пара
+											</th>
+											<th class='uk-text-center'>
+												Цена
+											</th>
+											<th class='uk-text-center'>
+												RSI
+											</th>
+											<th class='uk-text-center'>
+												SMA short
+											</th>
+											<th class='uk-text-center'>
+												SMA long
+											</th>
+											<th class='uk-text-center'>
+												Bollinger
+											</th>
+											<th class='uk-text-center'>
+												Предполагаемый заработок
+											</th>
+											<th class='uk-text-center'>
+												Операции
+											</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+										{% for item in data %}
+											<tr>
+												<td id='symbol-{{ item.symbol }}' class='uk-text-center'>
+													{{ item.symbol }}
+												</td>
+												<td class='uk-text-center'>
+													<div class="price-symbol">
+														<div class='symbol' id='price-{{ item.symbol }}'>
+															{{ item.price }}
+														</div>
+														<p class="buy" id='buy-{{ item.symbol }}'>$0.00</p>
+														<p class="sell" id='sell-{{ item.symbol }}'>$0.00</p>
+													</div>
+												</td>
+												<td id='rsi-{{ item.symbol }}' class='uk-text-center'>
+													{{ item.rsi }}
+												</td>
+												<td id='sma_short-{{ item.symbol }}' class='uk-text-center'>
+													{{ item.sma_short }}
+												</td>
+												<td id='sma_long-{{ item.symbol }}' class='uk-text-center'>
+													{{ item.sma_long }}
+												</td>
+												<td id='bollinger-{{ item.symbol }}' class='uk-text-center'>
+													{{ item.bollinger }}
+												</td>
+												<td id='profit-{{ item.symbol }}' class='uk-text-center'>
+													
+												</td>
+												<td id='buttons' class='uk-text-center'>
+													<ul class="uk-list">
+													<li>
+														<a id="reset-indication" id-data="{{ item.symbol }}">Пересчитать индикаторы</a>
+													</li>
+													<li>
+														<a id="reset-profit" id-data="{{ item.symbol }}">Пересчитать прибыль</a>
+													</li>
+													</ul>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
