@@ -3,7 +3,84 @@ function log(data){
 }
 
 $(document).ready(function() {
+    const id = '';
 
+    // Функция для загрузки данных о ботах
+    function loadBots() {
+        $.ajax({
+            url: '/api/bots', 
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                id: id
+            },
+            success: function(response) {
+                if(response.status === 'success') {
+                    // Находим tbody таблицы BotsClient
+                    const tbody = $('#BotsClient tbody');
+                    tbody.empty(); // Очищаем таблицу перед добавлением новых данных
+                    
+                    // Перебираем полученные данные о ботах
+                    response.bots.forEach((bot, index) => {
+                        // Формируем строку таблицы для каждого бота
+                        const row = `
+                            <tr>
+                                <td class="uk-text-center">
+                                    ${index + 1}
+                                </td> <!-- Порядковый номер -->
+                                <td class="uk-text-center">
+                                    <a id="open-modal-bot" href="#modal-bot-symbol" uk-toggle id-data="${bot.id}">${bot.symbol}</a>
+                                </td> <!-- Торговая пара (например BTCUSDT) -->
+                                <td class="uk-text-center" id="price-${bot.symbol}">${bot.price}</td> <!-- Текущая цена (обновляется через websocket) -->
+                                <td class="uk-text-center">${bot.price_min}</td> <!-- Минимальная цена для торговли -->
+                                <td class="uk-text-center">${bot.price_max}</td> <!-- Максимальная цена для торговли -->
+                            </tr>
+                        `;
+                        tbody.append(row);
+                    });
+                } else {
+                    UIkit.notification("Ошибка при загрузке данных о ботах", {status: 'danger', pos: 'top-right'});
+                }
+            },
+            error: function(xhr, status, error) {
+                UIkit.notification("Ошибка при выполнении запроса: " + error, {status: 'danger', pos: 'top-right'});
+            }
+        });
+    }
+
+    // Загружаем данные при загрузке страницы
+    loadBots();
+
+    // Обновляем данные каждые 5 секунд
+    setInterval(loadBots, 5000);
+
+    // Открытие модального окна для бота
+    $(document).on('click', '#open-modal-bot', function() {
+        const id = $(this).attr('id-data');
+        $('#modal-bot-symbol-title').html(id);
+        $.ajax({
+            url: '/api/bots',
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                id: id
+            },
+            success: function(response) {
+                //console.log(response.bots);
+                $('#modal-b-symbol').val(response.bots[0].symbol);
+                $('#modal-b-min').val(response.bots[0].price_min);
+                $('#modal-b-max').val(response.bots[0].price_max);
+            },
+            error: function(xhr, status, error) {
+                UIkit.notification("Ошибка при выполнении запроса: " + error, {status: 'danger', pos: 'top-right'});
+            }  
+        });
+    });
+
+
+
+
+    
     /*
 	
     const socket = io("wss://binance.ionit.online");

@@ -32,12 +32,90 @@
 		</div>
 		<div class="uk-container-content">
 		<div uk-grid>
+			<div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-2@l">
+				<div class="container-box">
+					<h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 text-left flex items-center gap-2 uk-position-relative">
+                        Боты
+                        <div class="uk-text-right add-bot-symbol">
+                            <a href="#modal-bot-symbol" uk-toggle id-data="1">Добавить бота</a>
+                        </div>
+                    </h2>
+					<div class="uk-flex-1">
+						<div class="inner-box">
+							<div class="uk-overflow-auto">
+
+								<table id='BotsClient' class='uk-table uk-table-divider uk-table-striped uk-table-hover uk-table-small uk-table-justify '>
+									<thead>
+										<tr>
+                                            <th width="50px">
+                                                №
+                                            </th>
+                                            <th>
+                                                Пара
+                                            </th>
+                                            <th>
+                                                Цена
+                                            </th>
+                                            <th>
+                                                Min
+                                            </th>
+                                            <th>
+                                                Max 
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                                <!-- This is the modal -->
+                                <div id="modal-bot-symbol" uk-modal>
+                                    <div class="uk-modal-dialog uk-modal-body">
+                                        <h2 class="uk-modal-title" id="modal-bot-symbol-title"></h2>
+                                        <form id="form-bot-symbol" uk-grid>
+                                            <div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-1@l">
+                                                <label class="uk-form-label" for="symbol">Торговая пара</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" id="modal-b-symbol" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-2@l">
+                                                <label class="uk-form-label" for="symbol">Min</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" id="modal-b-min" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-2@l">
+                                                <label class="uk-form-label" for="symbol">Max</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" id="modal-b-max" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <p class="uk-text-right button-modal-bot">
+                                            <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+                                            <button class="uk-button uk-button-primary" type="button">Сохранить</button>
+                                            <button class="uk-button uk-button-danger" type="button">Удалить</button>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
 			<div class="uk-width-1-1@s uk-width-1-2@m uk-width-1-1@l">
 				<div class="container-box">
 					<h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 text-left flex items-center gap-2 ">Автоматический подбор индикаторов для максимально выгодной сделки</h2>
 					<div class="uk-flex-1">
 						<div class="inner-box">
 							<div class="uk-overflow-auto">
+
 								<table class='uk-table uk-table-divider uk-table-striped uk-table-hover uk-table-small uk-table-justify '>
 									<thead>
 										<tr>
@@ -117,6 +195,7 @@
 					</div>
 				</div>
 			</div>
+-->
 		</div>
 		</div>
 	</div>
